@@ -1,0 +1,87 @@
+The goal for this website is to provide a simple way for non-technical students to
+search for and download text from the New York Times archive. 
+
+Frontend Design: 
+    The home page will be the search form, with the "data provided by the NYTs" logo embedded. 
+
+    The user will need to input: 
+        keyword (must be a string)
+        start date (must be in ISO format DD-MM-YYYY i think)
+        end date (ditto)
+        response cap (default is 10: can only change if also provided with an API key)
+            (API key)
+
+    Upon hitting submit, the user will recieve a popup notification 
+    stating how many results were found and estimated wait time ((results / 10) * 6 seconds)
+    "Aprox. x results found. Collecting RESPONSE_CAP articles. Estimated time remaining: xx"
+
+    start time, estimated time remaining. 
+
+    When the search finishes, the user will be brought to a new page. 
+    Success! collected x articles from the new york times. 
+    click here to download csv. From this page, there will also be a link to go home. 
+
+    There will also be an About page.
+
+
+The app will be hosted with Heroku or Pythonanywhere. If needed, I can password protect it. 
+The code for the app will be hosted publicly on my personal github, with a good README. 
+
+Process: 
+    Test first dev with pytest unit tests. I would like to experiment with GitHub actions CI and deployment 
+    workflows but that seems like it may not be a priority.
+    Using notion board to track issues.  
+
+Backend Design: 
+    Routes: 
+        GET "/": empty search form 
+        GET "/about": static About page
+        POST "/": sends search request to server, gets first page of results, sends redirect to waiting page along with 
+            search metadata (how many hits, how many items are being collected, estimated time to collect, start time)
+            and the original search
+        
+    main(takes request object with: keyword: str, start_date: str, end_date: str, apikey: str) -> link to csv file? 
+       
+
+        methods needed: 
+            validate dates (takes date intput, returns Datetime object or throws an error)
+            format_query (takes keyword string,  strips leading and trailing whitespace, 'returns with + signs instead of interior spaces)
+            search_nyt() main method from gatherer
+            dataframe to link to csv file 
+
+    We can basically use the nyt_gatherer module from projectMelk from this and simply put the MelkRow definition into the file. 
+    I would put this in a seperate file and call it from views with one line. 
+
+        Question: how to implement "waiting page"/popup? Need to put that up as soon as possible, then keep it up 
+        until search is done, then redirect to the results page. 
+        https://mattsegal.dev/offline-tasks.html
+
+
+
+
+
+
+
+
+https://docs.djangoproject.com/en/4.1/ref/request-response/#django.http.HttpResponse
+Telling the browser to treat the response as a file attachment¶
+
+To tell the browser to treat the response as a file attachment, set the Content-Type and Content-Disposition headers. For example, this is how you might return a Microsoft Excel spreadsheet:
+
+>>> response = HttpResponse(my_data, headers={
+...     'Content-Type': 'application/vnd.ms-excel',
+...     'Content-Disposition': 'attachment; filename="foo.xls"',
+... })
+There’s nothing Django-specific about the Content-Disposition header, but it’s easy to forget the syntax, so we’ve included it here.
+
+
+form example: 
+https://docs.djangoproject.com/en/4.1/intro/tutorial04/
+
+how to create csv output
+https://docs.djangoproject.com/en/4.1/howto/outputting-csv/
+
+loading page: 
+https://stackoverflow.com/questions/59510573/how-can-i-show-a-loading-animation-in-django-while-the-server-is-processing-a-vi
+basically, have a response page. By default, shows a loading gif. Redirect here immediately when the 
+form is submitted. Then, when response is finally recieved, hide the loading gif and show the response. 
