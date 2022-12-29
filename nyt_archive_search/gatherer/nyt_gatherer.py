@@ -4,7 +4,7 @@ import time
 import requests
 import json
 from bs4 import BeautifulSoup
-from melk_format import MelkRow, melk_fields
+from gatherer.melk_format import MelkRow, melk_fields
 
 SOURCE_NAME = "new_york_times"
 TYPE= "article"

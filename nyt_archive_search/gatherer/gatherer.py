@@ -1,7 +1,8 @@
 import pandas as pd
 import datetime as dt
-import nyt_gatherer
-import config
+import gatherer.nyt_gatherer as nyt_gatherer
+import gatherer.config as config
+import gatherer.melk_format as melk_format
 
 def gatherer(request):
     """
@@ -12,14 +13,7 @@ def gatherer(request):
     Returns csv file. 
     """
 
-    try:
-        start_date = dt.date.fromisoformat(request.start_date)
-        end_date = dt.date.fromisoformat(request.end_date)
-    except ValueError as error:
-        raise error
-
-    if start_date >= end_date:
-        raise ValueError("Error. Start date must be before end date.")
+    start_date, end_date = validate_dates(request.start_date, request.end_date)
 
     if request.api_key:
         download_limit = request.download_limit
@@ -38,3 +32,16 @@ def gatherer(request):
     )
     
     return nyt.to_csv(filename_out)
+
+def validate_dates(start_date:str, end_date:str):
+    try:
+        start_date = dt.date.fromisoformat(start_date)
+        end_date = dt.date.fromisoformat(end_date)
+    except ValueError as error:
+        raise error
+    if start_date >= end_date:
+        raise ValueError("Error. Start date must be before end date.")
+
+    return start_date, end_date
+
+    
