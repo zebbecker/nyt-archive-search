@@ -2,11 +2,15 @@ from django.test import TestCase, Client
 import pandas as pd
 import datetime
 import sys, os
+import json
 
 import gatherer.gatherer as gatherer
 import gatherer.nyt_gatherer as nyt_gatherer
 import gatherer.melk_format as melk_format
 import gatherer.config as config
+
+TESTDATA_FILENAME = 'gatherer/fixtures/articlesearchresponse.json'
+
 
 
 """ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
@@ -166,29 +170,34 @@ class KeywordFormatTestCase(TestCase):
 
 class ParseArticleTestCase(TestCase):
 
+    def setUp(self):
+        self.testfile = open(TESTDATA_FILENAME)
+        self.testjson = json.load(self.testfile)
+
     def test_parse_article(self):
-        # @TODO store example JSON response and input expected values
-        json = None
         data = []
 
-        nyt_gatherer.parse_article(article=json, data=data, next_id=12)
+        nyt_gatherer.parse_article(article=self.testjson, data=data, next_id=12)
 
         self.assertEqual(len(data), 1)
         row = data[0]
-        self.assertEqual(row.ID, 12)
-        self.assertEqual(row.SECTION, None)
-        self.assertEqual(row.SOURCE, None)
-        self.assertEqual(row.SOURCE_URL, None)
-        self.assertEqual(row.DATE, None)
-        self.assertEqual(row.TITLE, None)
-        self.assertEqual(row.FULL_TEXT, None)
-        self.assertEqual(row.TYPE, None)
+        self.assertEqual(row['ID'], 12)
+        self.assertEqual(row['SECTION'], "World")
+        self.assertEqual(row['SOURCE'], nyt_gatherer.SOURCE_NAME)
+        self.assertEqual(row['SOURCE_URL'], "https://www.nytimes.com/2022/05/23/world/haitian-creole-history.html")
+        self.assertEqual(row['DATE'], "2022-05-23 15:06:55")
+        self.assertEqual(row['TITLE'], "A Story About Haitian History, in Haitian Creole.")
+        #self.assertEqual(row['FULL_TEXT'], None)
+        self.assertEqual(row['TYPE'], nyt_gatherer.TYPE)
+
+    def tearDown(self):
+        self.testfile.close()
 
 class ScrapeArticleTextTestCase(TestCase):
 
     def test_scrape_body_text(self):
         # @TODO create example 
-        url = None
+        url = "https://www.nytimes.com/2023/01/03/climate/california-flood-atmospheric-river.html"
         expected_content = None
         content = nyt_gatherer.scrape_body_text(url)
         self.assertEqual(content, expected_content)
