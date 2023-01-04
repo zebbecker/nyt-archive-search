@@ -135,7 +135,7 @@ def parse_article(article, data, next_id):
         title=article["headline"]["main"],
         section=article["section_name"],
         source_url=article["web_url"],
-        date=dt.datetime.fromisoformat(article["pub_date"].split("+")[0]),
+        date=dt.datetime.fromisoformat(article["pub_date"].split("+")[0]).strftime("%Y-%m-%d %H:%M:%S"),
     )
 
     data.append(vars(this_article))
