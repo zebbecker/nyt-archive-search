@@ -31,6 +31,8 @@ class PagesLoadTestCase(TestCase):
     @classmethod
     def setUpClass(self):
         self.client = Client()
+        super(PagesLoadTestCase, self).setUpClass()
+
 
     def test_home_loads(self):
         response = self.client.get('/')
@@ -42,6 +44,11 @@ class PagesLoadTestCase(TestCase):
         self.assertEqual(200, response.status_code)
         self.assertTemplateUsed(response, 'about')
 
+    """ @classmethod
+    def tearDownClass(cls) -> None:
+        return super().tearDownClass() """
+
+
 
 class FormSubmissionTestCase(TestCase):
 
@@ -50,6 +57,7 @@ class FormSubmissionTestCase(TestCase):
         self.client = Client()
         query = {'keyword': 'Argentina', 'start_date': '2022-11-01', 'end_date': '2022-12-30', 'APIKey': ''}
         self.responseNoKey = self.client.post(path='/', data=query)
+        super(FormSubmissionTestCase, self).setUpClass()
    
     # @tag('slow')
     def test_redirect(self):
@@ -77,7 +85,8 @@ class DataframeOKTestCase(TestCase):
         can take up to 6 seconds each time. 
         """
         self.df = nyt_gatherer.search_nyt("Argentina", datetime.date(2022, 11, 1), 
-        datetime.date(2022, 12, 28), None)
+        datetime.date(2022, 12, 28), config.NYT_API_KEY, config.NYT_DEFAULT_LIMIT)
+        super(DataframeOKTestCase, self).setUpClass()
         
 
     def test_columns_present(self):
@@ -119,7 +128,8 @@ class LongDataframeOKTestCase(TestCase):
         We only want to do this setup once each time we run tests, because it is slow. 
         """
         self.df = nyt_gatherer.search_nyt("Argentina", "2022-11-01", 
-       "2022-12-28", config.NYT_API_KEY, 100)
+        "2022-12-28", config.NYT_API_KEY, 100)
+        super(LongDataframeOKTestCase, self).setUpClass()
         
 
     def test_columns_present(self):
@@ -190,8 +200,9 @@ class ParseArticleTestCase(TestCase):
         #self.assertEqual(row['FULL_TEXT'], None)
         self.assertEqual(row['TYPE'], nyt_gatherer.TYPE)
 
-    def tearDown(self):
-        self.testfile.close()
+    """   def tearDown(self):
+        super()
+        self.testfile.close() """
 
 class ScrapeArticleTextTestCase(TestCase):
 

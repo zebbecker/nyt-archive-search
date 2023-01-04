@@ -41,7 +41,7 @@ def search_nyt(keyword: str, start_date: dt.date, end_date: dt.date, api_key: st
             break
 
         items_downloaded = download_one_page(
-            keyword, start_date, end_date, results_page, data, total_articles_collected
+            keyword, start_date, end_date, api_key, results_page, data, total_articles_collected, 
         )
         total_articles_collected += items_downloaded
 
