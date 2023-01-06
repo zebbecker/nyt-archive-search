@@ -110,7 +110,7 @@ class DataframeOKTestCase(TestCase):
 
     def test_user_limit(self):
         self.assertLessEqual(len(self.df), config.NYT_DEFAULT_LIMIT, 
-        'Demo search with no API key returned too many results. Num results: ' + len(self.df))
+        'Demo search with no API key returned too many results. Num results: ' + str(len(self.df)))
 
 
 #@TODO this test but through main gatherer
@@ -127,8 +127,10 @@ class LongDataframeOKTestCase(TestCase):
 
         We only want to do this setup once each time we run tests, because it is slow. 
         """
-        self.df = nyt_gatherer.search_nyt("Argentina", "2022-11-01", 
-        "2022-12-28", config.NYT_API_KEY, 100)
+        self.df = nyt_gatherer.search_nyt(
+            "Argentina", datetime.date(2022, 11, 1), 
+            datetime.date(2022, 12, 28), config.NYT_API_KEY, 100
+        )
         super(LongDataframeOKTestCase, self).setUpClass()
         
 
@@ -149,29 +151,31 @@ class LongDataframeOKTestCase(TestCase):
         self.assertGreater(len(self.df), config.NYT_DEFAULT_LIMIT)
 
     def test_rows_not_empty(self):
-        row = self.df.get(0)
+        row = self.df.head(1)
+    
         for col in self.df.columns:
-            # None, null, "", [], and 0 values are falsy
-            self.assertTrue(row[col], 'Empty value for ' + col)
+            self.assertFalse(row[col].empty, 'Empty value for ' + col)
 
     def test_user_limit(self):
         self.assertLessEqual(len(self.df), 100, 
-        'Demo search with API key and user limit 100 returned too many results. Num results: ' + len(self.df))
+        'Demo search with API key and user limit 100 returned too many results. Num results: ' + str(len(self.df)))
 
 class DateProcessingTestCase(TestCase):
 
     def test_valid_dates(self):
-        self.assertIs(gatherer.validate_dates("2022-01-01", "2022-02-02")[0], datetime.date)
+        self.assertIsInstance(gatherer.validate_dates("2022-01-01", "2022-02-02")[0], datetime.date)
         self.assertEqual(gatherer.validate_dates("2022-01-01", "2022-02-02")[0], datetime.date(2022, 1, 1))
-        self.assertIs(gatherer.validate_dates("2022-01-01", "2022-02-02")[1], datetime.date)
+        self.assertIsInstance(gatherer.validate_dates("2022-01-01", "2022-02-02")[1], datetime.date)
         self.assertEqual(gatherer.validate_dates("2022-01-01", "2022-02-02")[1], datetime.date(2022, 2, 2))
 
     def test_invalid_inputs(self):
-        self.assertRaises(Exception, gatherer.validate_dates("1", "2"))
-        self.assertRaises(Exception, gatherer.validate_dates("Another string", "2022-01-01"))
-        self.assertRaises(Exception, gatherer.validate_dates("01/01/2022", "2022-02-01"))
-        self.assertRaises(Exception, gatherer.validate_dates(None, None))
-        self.assertRaises(Exception, gatherer.validate_dates("2022-40-40", "2022-01-01"))
+        #with self.assertRaises(ValueError): pass
+        with self.assertRaises(ValueError): gatherer.validate_dates("1", "2")
+        #self.assertRaises(ValueError, gatherer.validate_dates("1", "2"))
+        with self.assertRaises(ValueError): gatherer.validate_dates("Another string", "2022-01-01")
+        with self.assertRaises(ValueError): gatherer.validate_dates("01/01/2022", "2022-02-01")
+        with self.assertRaises(TypeError): gatherer.validate_dates(None, None)
+        with self.assertRaises(ValueError): gatherer.validate_dates("2022-40-40", "2022-01-01")
     
 class KeywordFormatTestCase(TestCase):
 
