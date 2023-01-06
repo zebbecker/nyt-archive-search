@@ -2,8 +2,8 @@ import datetime as dt
 import pandas as pd
 import time
 import requests
+import requests_html
 import json
-from bs4 import BeautifulSoup
 from gatherer.melk_format import MelkRow, melk_fields
 
 SOURCE_NAME = "new_york_times"
@@ -150,17 +150,15 @@ def scrape_body_text(url):
         content: Body text of the article, without paragraph breaks.
     """
 
-    # session = requests_html.Session()
-    session = requests.Session()
-    page = session.get(url)
+    session = requests_html.HTMLSession()
+    resp = session.get(url)
 
-    soup = BeautifulSoup(page.content, "html.parser")
-
-    # NYT archive webpages use <p class="css-at9mc1 evys1bk0"> elements for article body
-    ps = soup.find_all("p", class_="css-at9mc1")
+    # NYT archive webpages use <p class="css-at9mc1 evys1bk0"> elements for article body paragraphs
+    sel = resp.html.find(".css-at9mc1")
 
     content = ""
-    for p in ps:
+
+    for p in sel:
         content = content + p.text + " "
 
     return content
