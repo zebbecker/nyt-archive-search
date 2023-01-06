@@ -103,10 +103,10 @@ class DataframeOKTestCase(TestCase):
         self.assertGreater(len(self.df), 0, 'Dataframe is empty')
 
     def test_rows_not_empty(self):
-        row = self.df.get(0)
+        row = self.df.head(1)
+    
         for col in self.df.columns:
-            # None, null, "", [], and 0 values are falsy
-            self.assertTrue(row[col], 'Empty value for ' + col)
+            self.assertFalse(row[col].empty, 'Empty value for ' + col)
 
     def test_user_limit(self):
         self.assertLessEqual(len(self.df), config.NYT_DEFAULT_LIMIT, 
