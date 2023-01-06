@@ -45,7 +45,7 @@ def search_nyt(keyword: str, start_date: dt.date, end_date: dt.date, api_key: st
         )
         total_articles_collected += items_downloaded
 
-        if items_downloaded < ARTICLES_PER_PAGE:
+        if items_downloaded < ARTICLES_PER_PAGE or total_articles_collected >= download_limit:
             # This must be the last page
             next_page = False
 
