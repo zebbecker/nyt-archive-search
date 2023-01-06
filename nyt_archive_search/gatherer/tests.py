@@ -9,7 +9,9 @@ import gatherer.nyt_gatherer as nyt_gatherer
 import gatherer.melk_format as melk_format
 import gatherer.config as config
 
-TESTDATA_FILENAME = 'gatherer/fixtures/articlesearchresponse.json'
+JSON_EX_FILENAME = 'gatherer/fixtures/articlesearchresponse.json'
+FULL_TEXT_EX_FILENAME = 'gatherer/fixtures/bodytext.txt'
+
 
 
 
@@ -185,7 +187,7 @@ class KeywordFormatTestCase(TestCase):
 class ParseArticleTestCase(TestCase):
 
     def setUp(self):
-        self.testfile = open(TESTDATA_FILENAME)
+        self.testfile = open(JSON_EX_FILENAME)
         self.testjson = json.load(self.testfile)
 
     def test_parse_article(self):
@@ -211,8 +213,9 @@ class ParseArticleTestCase(TestCase):
 class ScrapeArticleTextTestCase(TestCase):
 
     def test_scrape_body_text(self):
-        # @TODO create example 
+        self.maxDiff = None
         url = "https://www.nytimes.com/2023/01/03/climate/california-flood-atmospheric-river.html"
-        expected_content = None
+        expected_content = open(FULL_TEXT_EX_FILENAME).read()
         content = nyt_gatherer.scrape_body_text(url)
         self.assertEqual(content, expected_content)
+        
