@@ -1,0 +1,13 @@
+{% extends 'gatherer/base.html' %}
+
+{% block content %}
+
+<h2>Search submitted. Results will be displayed below. Search terms: </h2>
+<p style="color: red;">Keyword: {{ keyword }}</p>
+<p style="color: red;">Start Date: {{ start_date }}</p>
+<p style="color: red;">End Date: {{ end_date }}</p>
+<p style="color: red;">Use demo key: {{ use_demo_key }}</p>
+<p style="color: red;">API Key: {{ api_key }}</p>
+<p style="color: red;">Download limit: {{ download_limit }}</p>
+
+{% endblock %}

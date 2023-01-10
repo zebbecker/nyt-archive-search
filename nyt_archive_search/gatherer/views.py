@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .forms import SearchForm
-import gatherer
+import gatherer.gatherer as gt
 
 def index(request):
     return render(request, 'gatherer/index.html')
@@ -11,20 +11,21 @@ def about(request):
 
 def search(request):
     if request.method == "POST":
-        # pass form to gatherer
-        # redirect to results page. 
-        # display results. 
         form = SearchForm(request.POST)
         if form.is_valid():
-            # results = gatherer.gatherer(request)
             
-            # return redirect('results', results=form)
-            return redirect('/gatherer/results/')
+            c = form.cleaned_data
 
-    
-    form = SearchForm()
+            return render(request, 'gatherer/display_results.html', c)
+    else:
+        form = SearchForm()
+
     return render(request, 'gatherer/search.html', {'form': form})
 
-def results(request):
-    # return render('gatherer/results.html', results)
-    return HttpResponse("This is the results page.")
+
+def display_results(request, keyword, start_date, end_date):
+    return render(request, 'display_results.html', {'keyword': keyword, 'start_date': start_date, 'end_date': end_date})
+
+def test_view(request, name):
+    string = "Hello, " + name
+    return HttpResponse(string)
