@@ -42,4 +42,7 @@ jobs:
       run: |
         pwd 
         ls -a
+        cd nyt_archive_search
+        pwd
+        ls -a
         python manage.py test
