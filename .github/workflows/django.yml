@@ -23,7 +23,7 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Change Into Inner Folder
       run: | 
-        cd nyt-archive-search
+        cd nyt_archive_search
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
