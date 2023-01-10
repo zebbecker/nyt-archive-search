@@ -40,4 +40,6 @@ jobs:
         sed -i "1s/.*/NYT_API_KEY = '$api_key'/" nyt_archive_search/gatherer/config.py
     - name: Run Tests
       run: |
+        pwd 
+        ls -a
         python manage.py test
