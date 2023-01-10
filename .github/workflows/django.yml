@@ -37,7 +37,7 @@ jobs:
     - name: Install Secret API Key
       run: |
         api_key=${{ secrets.api_key }}
-        sed -i "1s/.*/NYT_API_KEY = '$api_key'/" gatherer/config.py
+        sed -i "1s/.*/NYT_API_KEY = '$api_key'/" nyt_archive_search/gatherer/config.py
     - name: Run Tests
       run: |
         python manage.py test
