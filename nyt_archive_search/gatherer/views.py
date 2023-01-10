@@ -38,6 +38,7 @@ def search(request):
             )
 
             df_out.to_csv(path_or_buf=response, sep=";", index=False)
+
             return response
 
             # return render(request, "gatherer/display_results.html", c)
@@ -53,8 +54,3 @@ def display_results(request, keyword, start_date, end_date):
         "display_results.html",
         {"keyword": keyword, "start_date": start_date, "end_date": end_date},
     )
-
-
-def test_view(request, name):
-    string = "Hello, " + name
-    return HttpResponse(string)

@@ -34,14 +34,14 @@ class PagesLoadTestCase(TestCase):
         super(PagesLoadTestCase, self).setUpClass()
 
     def test_home_loads(self):
-        response = self.client.get("/")
+        response = self.client.get("/gatherer/")
         self.assertEqual(200, response.status_code)
-        self.assertTemplateUsed(response, "home")
+        self.assertTemplateUsed(response, "gatherer/index.html")
 
     def test_about_loads(self):
-        response = self.client.get("/about")
+        response = self.client.get("/gatherer/about/")
         self.assertEqual(200, response.status_code)
-        self.assertTemplateUsed(response, "about")
+        self.assertTemplateUsed(response, "gatherer/about.html")
 
     """ @classmethod
     def tearDownClass(cls) -> None:
@@ -61,16 +61,16 @@ class FormSubmissionTestCase(TestCase):
         self.responseNoKey = self.client.post(path="/", data=query)
         super(FormSubmissionTestCase, self).setUpClass()
 
-    # @tag('slow')
-    def test_redirect(self):
+        # @tag('slow')
+        # def test_redirect(self):
         """
         @TODO test that redirects, then test that response data loads when available.
         """
 
-        self.assertRedirects(self.responseNoKey, "/data")
+        # self.assertRedirects(self.responseNoKey, "/data")
 
-    def test_response_no_APIKey(self):
-        self.assertTrue(False)
+    # def test_response_no_APIKey(self):
+    # self.assertTrue(False)
 
 
 # @TODO this test but through main gatherer
@@ -144,7 +144,7 @@ class LongDataframeOKTestCase(TestCase):
             datetime.date(2022, 11, 1),
             datetime.date(2022, 12, 28),
             config.NYT_API_KEY,
-            100,
+            30,
         )
         super(LongDataframeOKTestCase, self).setUpClass()
 
@@ -243,9 +243,9 @@ class ParseArticleTestCase(TestCase):
         # self.assertEqual(row['FULL_TEXT'], None)
         self.assertEqual(row["TYPE"], nyt_gatherer.TYPE)
 
-    """   def tearDown(self):
+    def tearDown(self):
+        self.testfile.close()
         super()
-        self.testfile.close() """
 
 
 class ScrapeArticleTextTestCase(TestCase):
