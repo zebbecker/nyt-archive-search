@@ -29,7 +29,7 @@ jobs:
     - name: Install Dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r "requirements.txt"
     - name: Install Secret API Key
       run: |
         api_key=${{ secrets.api_key }}
