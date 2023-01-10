@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nyt_archive_search.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "nyt_archive_search.settings")
 
 application = get_asgi_application()
