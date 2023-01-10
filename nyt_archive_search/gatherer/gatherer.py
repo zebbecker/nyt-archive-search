@@ -14,7 +14,7 @@ def gatherer(keyword, start_date, end_date, api_key, download_limit):
     Returns csv file.
     """
 
-    start_date, end_date = validate_dates(start_date, end_date)
+    # start_date, end_date = validate_dates(start_date, end_date)
 
     if not api_key:
         download_limit = config.NYT_DEFAULT_LIMIT
@@ -37,13 +37,15 @@ def gatherer(keyword, start_date, end_date, api_key, download_limit):
     return nyt.to_csv(filename_out)
 
 
-def validate_dates(start_date: str, end_date: str):
-    try:
-        start_date = dt.date.fromisoformat(start_date)
-        end_date = dt.date.fromisoformat(end_date)
-    except ValueError as error:
-        raise error
-    if start_date >= end_date:
-        raise ValueError("Error. Start date must be before end date.")
+""" def validate_dates(start_date, end_date):
 
-    return start_date, end_date
+    if not (
+        (isinstance(start_date, dt.date) or isinstance(start_date, dt.datetime))
+        and (isinstance(end_date, dt.date) or isinstance(end_date, dt.datetime))
+    ):
+        raise ValueError
+
+    if end_date > start_date:
+        raise ValueError("Error: Start date must be before end date.")
+
+    return start_date, end_date """

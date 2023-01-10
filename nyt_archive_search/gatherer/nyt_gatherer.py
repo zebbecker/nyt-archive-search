@@ -185,6 +185,8 @@ def scrape_body_text(url):
 
     session = requests_html.HTMLSession()
     resp = session.get(url)
+    # resp.html.render()
+    session.close()
 
     # NYT archive webpages use <p class="css-at9mc1 evys1bk0"> elements for article body paragraphs
     sel = resp.html.find(".css-at9mc1")
