@@ -1,6 +1,6 @@
 body {
     background-color: #F5F5F5;
-    font-family: Arial, sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
 }
 
 main {
@@ -67,27 +67,3 @@ footer {
 .nav-link {
     font-size: xx-large;
 }
-
-
-
-/* table {
-    width: 100%;
-    border: solid;
-}
-
-#nyt_link {
-    float: right;
-    color: #45A049;
-}
-
-.footer-links a {
-    margin: 0 10px;
-}
-
-#github_link {
-    float: left;
-}
-
-#container {
-    width: 100%;
-} */
