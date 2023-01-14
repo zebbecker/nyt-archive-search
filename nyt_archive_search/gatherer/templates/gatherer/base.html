@@ -1,7 +1,16 @@
+{% load static %}
+<!DOCTYPE html>
+
 <head>
     NYT Search Project
+    <link rel="stylesheet" href="{% static 'gatherer.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
 </head>
+
 <body>
+
+    {% block script %}
+    {% endblock %}
 
     {% block content %}
     {% endblock %}

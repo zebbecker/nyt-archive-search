@@ -4,7 +4,16 @@ from django.core.exceptions import ValidationError
 
 
 class SearchForm(forms.Form):
-    keyword = forms.CharField(required=True, label="Keyword")
+    keyword = forms.CharField(
+        required=True,
+        label="Keyword",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Enter search term",
+                "style": "color: red;",
+            }
+        ),
+    )
     start_date = forms.DateField(required=True, help_text="MM/DD/YYYY")
     # start_date= forms.DateField(required=True, widget=forms.SelectDateWidget(), help_text="MM/DD/YYYY")
     end_date = forms.DateField(
@@ -18,9 +27,20 @@ class SearchForm(forms.Form):
             (False, "Enter personal API key (no download limit)"),
         ],
         label="API Mode",
+        widget=forms.Select(
+            {
+                "ng-change": "ChangeDemoStatus()",
+                "ng-model": "myValue",
+                "ng-init": "True",
+            }
+        ),
     )
-    download_limit = forms.IntegerField(required=False, min_value=1)
-    api_key = forms.CharField(required=False)
+    download_limit = forms.IntegerField(
+        required=False, min_value=1, widget=forms.NumberInput(attrs={"ng-if": "!demo"})
+    )
+    api_key = forms.CharField(
+        required=False, widget=forms.TextInput(attrs={"ng-if": "!demo"})
+    )
 
     def clean_start_date(self):
         data = self.cleaned_data["start_date"]

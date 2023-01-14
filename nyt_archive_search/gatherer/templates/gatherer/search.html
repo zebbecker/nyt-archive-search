@@ -1,11 +1,44 @@
 {% extends 'gatherer/base.html' %}
 
-{% block content %}
 
-    <form method="POST" action=""> {% csrf_token %}
+{% block script %}
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('searchCtrl', function ($scope, $http) {
+        $scope.submitted = false;
+        $scope.demo = true;
+
+        console.log($scope.demo)
+
+        $scope.ChangeDemoStatus = function () {
+
+            $scope.demo = !$scope.demo
+            console.log("changing demo")
+            console.log($scope.demo)
+
+        }
+
+    })
+
+    /* function ChangeDemoStatus() {
+        $scope.demo = !$scope.demo
+        console.log("changing demo")
+        console.log($scope.demo)
+    } */
+
+</script>
+{% endblock %}
+
+
+{% block content %}
+<div class="generic-container ng-cloak" ng-app="myApp" ng-controller="searchCtrl as ctrl">
+
+    <form method="POST" action="">
+        {% csrf_token %}
 
         {{ form.as_p }}
 
         <button type="submit" class="save btn btn-secondary">Search</button>
     </form>
+</div>
 {% endblock %}
