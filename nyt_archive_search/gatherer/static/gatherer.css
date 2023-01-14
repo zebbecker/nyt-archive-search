@@ -48,3 +48,46 @@ input[type=submit] {
 input[type=submit]:hover {
     background-color: #45A049;
 }
+
+/* footer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border: solid;
+} */
+
+footer {
+    background-color: lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 2%;
+}
+
+.nav-link {
+    font-size: xx-large;
+}
+
+
+
+/* table {
+    width: 100%;
+    border: solid;
+}
+
+#nyt_link {
+    float: right;
+    color: #45A049;
+}
+
+.footer-links a {
+    margin: 0 10px;
+}
+
+#github_link {
+    float: left;
+}
+
+#container {
+    width: 100%;
+} */
