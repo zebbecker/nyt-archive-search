@@ -3,6 +3,11 @@ body {
     font-family: Arial, sans-serif;
 }
 
+main {
+    padding: 60px;
+    margin-top: 60px;
+}
+
 form {
     margin: 50px auto;
     width: 400px;
