@@ -1,10 +1,50 @@
-
 {% extends 'gatherer/base.html' %}
 
 {% block content %}
+
 <body>
     <h1>
-        Welcome to site. This is the index page. 
+        Welcome to Archive Search.
     </h1>
+
+    <p>
+        Search for New York Times articles by keyword and download full
+        CSV datasets without writing any code!
+    </p>
+
+    <p>
+        Archive Search gives students and researchers easy access
+        to the New York Times article archive. This tool provides a simple graphical
+        interface for the <a href="https://developer.nytimes.com/docs/articlesearch-product/1/overview">NYT API</a>, and
+        streamlines the process
+        of data collection and formatting.
+    </p>
+
+    <p>
+        This project is pedagogical in nature- dead simple, approachable interfaces take
+        precedence over fine grained control. The ultimate goal of this project is to
+        make an important research method accessible to students and researchers without
+        backgrounds in computer science.
+    </p>
+
+    <h2>
+        Getting Started
+    </h2>
+
+    <p>
+        Use the <a href="/gatherer/demo/">demonstration search mode</a> to quickly
+        get started with a small example search. The demo mode gives you full search
+        functionality, but will only download the first ten results.
+    </p>
+    <p>
+        The New York Times limits how often you can query their API. Therefore, in order
+        to create larger datasets, you will need to acquire and input your own API key.
+        The process is quite simple- click <a href="https://developer.nytimes.com/get-started">here</a>
+        to get started. Make sure to save your personal API key somewhere private.
+    </p>
+    <p>
+        Once you have your own API key, you can download as many results as you desire
+        using the <a href="/gatherer/search">full search mode</a>.
+    </p>
 </body>
 {% endblock %}
