@@ -11,6 +11,7 @@ cssselect==1.2.0
 DateTime==4.9
 Django==4.1.4
 fake-useragent==1.1.1
+greenlet==2.0.1
 idna==3.4
 importlib-metadata==6.0.0
 lxml==4.9.2
@@ -20,8 +21,6 @@ pandas==1.5.2
 parse==1.19.0
 pathspec==0.10.3
 platformdirs==2.6.2
-pyee==8.2.2
-pyppeteer==1.0.2
 pyquery==2.0.0
 python-dateutil==2.8.2
 pytz==2022.7
@@ -32,8 +31,10 @@ soupsieve==2.3.2.post1
 sqlparse==0.4.3
 tomli==2.0.1
 tqdm==4.64.1
+typing_extensions==4.4.0
 urllib3==1.26.13
 w3lib==2.1.1
 websockets==10.4
+whitenoise==6.3.0
 zipp==3.11.0
 zope.interface==5.5.2
