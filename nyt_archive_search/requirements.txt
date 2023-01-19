@@ -32,6 +32,7 @@ requests-html==0.10.0
 six==1.16.0
 soupsieve==2.3.2.post1
 sqlparse==0.4.3
+supervisor
 tomli==2.0.1
 tqdm==4.64.1
 typing_extensions==4.4.0
