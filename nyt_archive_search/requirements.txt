@@ -11,6 +11,8 @@ cssselect==1.2.0
 DateTime==4.9
 Django==4.1.4
 fake-useragent==1.1.1
+greenlet==2.0.1
+gunicorn==20.1.0
 idna==3.4
 importlib-metadata==6.0.0
 lxml==4.9.2
@@ -30,10 +32,13 @@ requests-html==0.10.0
 six==1.16.0
 soupsieve==2.3.2.post1
 sqlparse==0.4.3
+supervisor
 tomli==2.0.1
 tqdm==4.64.1
+typing_extensions==4.4.0
 urllib3==1.26.13
 w3lib==2.1.1
 websockets==10.4
+whitenoise==6.3.0
 zipp==3.11.0
 zope.interface==5.5.2

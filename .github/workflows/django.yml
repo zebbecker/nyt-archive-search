@@ -28,6 +28,12 @@ jobs:
       uses: py-actions/py-dependency-install@v4.0.0
       with:
           path: "nyt_archive_search/requirements.txt"
+          
+    - name: Chrome Installation
+      uses: browser-actions/setup-chrome@v1.0.0
+      with: 
+          chrome-version: stable
+    - run: chrome --version 
     
     - name: Change Into Inner Folder
       run: | 
