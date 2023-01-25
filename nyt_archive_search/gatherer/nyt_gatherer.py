@@ -182,17 +182,23 @@ def scrape_body_text(url):
     returns:
         content: Body text of the article, without paragraph breaks.
     """
-
     session = requests_html.HTMLSession()
-    resp = session.get(url)
-    # resp.html.render()
-    session.close()
+    r = session.get(url)
+
+    if r.status_code == 403:
+        try:
+            r.html.render()
+            r = session.get(url)
+        except TimeoutError:
+            r.html.render()
+            r = session.get(url)
+            if r.status_code == 403:
+                return "Error: unable to scrape article text."
 
     # NYT archive webpages use <p class="css-at9mc1 evys1bk0"> elements for article body paragraphs
-    sel = resp.html.find(".css-at9mc1")
+    sel = r.html.find(".css-at9mc1")
 
     content = ""
-
     for p in sel:
         content = content + p.text + " "
 
