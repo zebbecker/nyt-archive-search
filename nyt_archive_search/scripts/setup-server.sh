@@ -27,6 +27,11 @@ ssh root@$SERVER /bin/bash << EOF
     echo -e "\n>>> Installing apt packages."
     apt-get -qq install python3-pip tree 
 
+    echo -e "\n>>> Installing Chrome packages."
+    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb  
+    apt install ./google-chrome-stable_current_amd64.deb
+    apt install libxss1 
+
     echo -e "\n>>> Installing virtualenv."
     pip3 install virtualenv
 
