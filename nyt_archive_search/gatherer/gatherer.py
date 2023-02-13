@@ -37,15 +37,5 @@ def gatherer(keyword, start_date, end_date, api_key, download_limit):
     return nyt.to_csv(filename_out)
 
 
-""" def validate_dates(start_date, end_date):
-
-    if not (
-        (isinstance(start_date, dt.date) or isinstance(start_date, dt.datetime))
-        and (isinstance(end_date, dt.date) or isinstance(end_date, dt.datetime))
-    ):
-        raise ValueError
-
-    if end_date > start_date:
-        raise ValueError("Error: Start date must be before end date.")
-
-    return start_date, end_date """
+def send_email(keyword, start_date, end_date, api_key, download_limit):
+    pass
