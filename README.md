@@ -8,6 +8,7 @@ User friendly web interface for creating datasets from the New York Times archiv
 
 ### Archive Search 
 
+Try the public beta online [here.](https://www.zebbecker.com/gatherer/)
 
 ### Project Description
 
@@ -21,9 +22,9 @@ The ultimate goal of the project is to make an important research method accessi
 
 The application is deployed to a small Digital Ocean droplet. The Django app runs inside a Gunicorn WSGI. It uses the ```requests_html``` module to interact with the New York Times Article Search API (v2) and ```pandas``` to manage data collection. [nyt_gatherer.py](https://github.com/zebbecker/nyt-archive-search/blob/main/nyt_archive_search/gatherer/nyt_gatherer.py) houses the primary data collection functionality. 
 
-Because the NYT API has a strict rate limit, users wishing to conduct large searches must provide their own API key. The [Full Search mode](http://159.203.178.166/gatherer/search/) returns a CSV file with metadata and text for each relevant article within the specified date range. 
+Because the NYT API has a strict rate limit, users wishing to conduct large searches must provide their own API key. The [Full Search mode](http://zebbecker.com/gatherer/search/) returns a CSV file with metadata and text for each relevant article within the specified date range. 
 
-The [Demo mode](http://159.203.178.166/gatherer/demo/) returns a similar file, but does not require the user to input their own API key. 
+The [Demo mode](http://zebbecker.com/gatherer/demo/) returns a similar file, but does not require the user to input their own API key. 
 
 ### Developers
 
