@@ -7,7 +7,7 @@ User friendly web interface for creating datasets from the New York Times archiv
 ![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)
 
 ### Archive Search 
-Click [here](http://159.203.178.166/gatherer/) to access Archive Search on the web. 
+
 
 ### Project Description
 
