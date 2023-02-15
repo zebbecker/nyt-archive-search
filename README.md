@@ -8,7 +8,6 @@ User friendly web interface for creating datasets from the New York Times archiv
 
 ### Archive Search 
 
-Try the public beta online [here.](https://www.zebbecker.com/gatherer/)
 
 ### Project Description
 
