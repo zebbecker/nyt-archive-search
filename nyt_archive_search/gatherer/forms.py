@@ -63,6 +63,10 @@ class FullSearchForm(forms.Form):
         ),
     )
 
+    user_email = forms.EmailField(
+        required=True,
+    )
+
     def clean_start_date(self):
         data = self.cleaned_data["start_date"]
         if data > datetime.date.today():
