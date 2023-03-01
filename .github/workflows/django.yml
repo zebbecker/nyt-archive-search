@@ -2,7 +2,7 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
     branches: [ "main" ]
 
@@ -14,6 +14,10 @@ jobs:
       max-parallel: 4
       matrix:
         python-version: [3.9]
+    env: 
+      DJANGO_EMAIL_HOST: ${{ secrets.DJANGO_EMAIL_HOST }}
+      DJANGO_EMAIL_USER: ${{ secrets.DJANGO_EMAIL_USER }}
+      DJANGO_EMAIL_PASSWORD: ${{ secrets.DJANGO_EMAIL_PASSWORD }}
 
     steps:
     
