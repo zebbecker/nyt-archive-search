@@ -7,7 +7,6 @@ User friendly web interface for creating datasets from the New York Times archiv
 ![License: MIT](https://img.shields.io/badge/license-MIT-brightgreen)
 
 ### Archive Search 
-Try the Archive Search beta online [here.](https://zebbecker.com/gatherer/)
 
 ### Project Description
 
