@@ -8,6 +8,8 @@ User friendly web interface for creating datasets from the New York Times archiv
 
 ### Archive Search 
 
+__UPDATE Fall 2023: Due to changes with the New York Times API, this project is no longer able to provide the full text of each article in the search results. I am no longer hosting the application online.__
+
 ### Project Description
 
 Archive Search is a web application that provides an simple, no-code method to search for and download datasets of New York Times articles on a specific topic. With Archive Search, students and researchers can quickly get started on computational text analysis projects. A custom dataset that includes the text of every article in the NYT digital archive that mentions the research topic provides a rich starting point for discovery. 
